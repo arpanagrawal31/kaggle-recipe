@@ -27,17 +27,19 @@ alling = []
 for k in ing:
     for l in k:
         alling.append(l)
-#alling = list(set(alling))
+unique_alling = list(set(alling))
+print len(alling)
 #list containing all the entries in ingredients of train.json        
 
 str_alling = []
 str_alling = [x.replace(' ','') for x in alling]
-#spaces have been stripped
 
-vect = CountVectorizer(input = str_alling, analyzer = 'word', ngram_range = (1, 1))
+# Forcing the vocabulary attribute will help you achieve the 6714 count
+vect = CountVectorizer(vocabulary = unique_alling, analyzer = 'word', ngram_range = (1, 1))
 X = vect.fit_transform(str_alling)
 fn = vect.get_feature_names()
-X = X.toarray()
+print len(vect.vocabulary_)
+#X = X.toarray()
 
 
 #from collections import Counter
